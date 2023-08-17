@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ScompartidoService } from '../services/scompartido.service';
 
 @Component({
   selector: 'app-tab1',
@@ -7,6 +8,21 @@ import { Component } from '@angular/core';
 })
 export class Tab1Page {
 
-  constructor() {}
+  message:string ='';
+
+  constructor(private shareSvc: ScompartidoService) {}
+
+  ngOnInit() {
+
+    this.shareSvc.sharedMessage.subscribe(message => this.message = message)
+
+    console.log(this.message);
+
+  }
+
+  newMessage() {
+    this.shareSvc.nextMessage("I am from page 1")
+  }
+
 
 }
